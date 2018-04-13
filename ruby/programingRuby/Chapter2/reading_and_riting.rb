@@ -1,4 +1,4 @@
-printf("Number: %5.2f,\nString: %s\n", 1.23,"hello") #Prints its arguements under the control of a format string (just like printf in C )
+printf("Number: %5.2f,\nString: %s\n", 1.23, "hello") #Prints its arguements under the control of a format string (just like printf in C )
 
 line = gets #gets method can receive the next line from your program's standard input stream.
 printf line
@@ -6,7 +6,7 @@ printf line
 #the gets method has a side effect :as well as returning the line just read, it also stores it into the global variable $_. If you call print with no arguement, It prints the contents of $_.
 =begin
 while gets
-  if /Ruby /   #这种书写方式已经被淘汰了，此处只是个例子
+  if /Ruby/   #这种书写方式已经被淘汰了，此处只是个例子
     print
     break
   end

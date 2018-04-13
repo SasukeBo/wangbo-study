@@ -18,12 +18,12 @@ puts b
 
 #hash的每个单元需要两个对象，一个作为索引key，另一个作为值，例如
 inst_section = {
-  'cello'=>'string',
-  'clarinet'=>'woodwind',
-  'drum'=>'percussion',
-  'oboe'=>'woodwind',
-  'trumpt'=>'brass',
-  'violin'=>'string'
+  'cello' => 'string',
+  'clarinet' => 'woodwind',
+  'drum' => 'percussion',
+  'oboe' => 'woodwind',
+  'trumpt' => 'brass',
+  'violin' => 'string'
 }
 puts inst_section['oboe']
 puts inst_section['cello']

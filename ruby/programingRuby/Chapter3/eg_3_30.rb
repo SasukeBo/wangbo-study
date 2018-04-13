@@ -3,7 +3,7 @@ require 'eg_3_29'
 
 class Song30 < Song2
   def duration_in_minutes
-    @duration/60.0    #force floating point
+    @duration / 60.0    #force floating point
   end
   def duration_in_minutes=(new_duration)
     @duration = (new_duration*60).to_i

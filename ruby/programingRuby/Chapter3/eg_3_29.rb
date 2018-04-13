@@ -3,7 +3,7 @@ require 'eg_3_28.rb'
 
 class Song2 < Song
 =begin
-  def duration=(new_duration)
+  def duration = (new_duration)
     @duration = new_duration
   end
 =end

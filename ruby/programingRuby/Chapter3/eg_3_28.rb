@@ -21,5 +21,5 @@ class Song
 end
 =begin
 song = Song.new("Bicylops", "Fleck", 260)
-puts song.artist,song.name,song.duration
+puts song.artist, song.name, song.duration
 =end

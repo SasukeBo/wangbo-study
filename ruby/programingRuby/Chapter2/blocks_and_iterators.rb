@@ -10,7 +10,7 @@ end
 #Once you have created a block, you can associate it with a call to a method.
 #greet { puts "Hi" }
 #If the method has parameters, they appear before the block.
-def verbose_greet(name ,user )
+def verbose_greet(name, user)
   puts "#{name}"
   yield #yeild作用就是调用块block里的程序段
   puts "#{user}"
