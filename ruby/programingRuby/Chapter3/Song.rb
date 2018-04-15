@@ -4,7 +4,12 @@ class Song
     @artist   = artist
     @duration = duration
   end
-
+  def name
+    return @name
+  end
+  def artist
+    return @artist
+  end
   def to_s    #override the to_s method
     "Song: #@name--#@artist (#@duration)"
   end
