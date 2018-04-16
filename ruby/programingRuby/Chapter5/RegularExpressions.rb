@@ -93,7 +93,7 @@ show_regexp(b, /\./)
 # 实际上星号只是多个修饰符中的一个
 # r* 匹配零个或多个r的出现
 # r+ 匹配一个或多个r的出现
-# r？匹配领个或一个r的出现
+# r？匹配零个或一个r的出现
 # r{m,n} 匹配至少m次和最多n次r的出现
 # r{m,}  匹配至少m次r的出现
 # r{m}   指定匹配m次r的出现
@@ -105,3 +105,55 @@ show_regexp(a, /\s.*\s/)
 show_regexp(a, /\s.*?\s/)
 show_regexp(a, /[aeiou]{2,99}/)
 show_regexp(a, /mo?o/)
+
+# 4.Alternation
+# 竖线是特别字符，行分割模式必须使用反斜线去转义
+# 未转义的竖线表示或逻辑匹配，要么是竖线左边要么是竖线右边。
+
+print "\n"*10
+a = "red ball blue sky"
+show_regexp(a, /d|e/)
+show_regexp(a, /al|lu/)
+show_regexp(a, /red ball|angry sky/)
+
+# Grouping
+# 你可以使用括号在正则表达式中编组词目。组内的所有东西被当做单个正则表达式对待。
+
+show_regexp('banana', /an*/)
+show_regexp('banana', /(an)*/)
+show_regexp('banana', /(an)+/)
+
+print "\n"*10, "Grouping\n"
+show_regexp(a, /blue|red/)
+show_regexp(a, /(blue|red) \w+/)
+show_regexp(a, /(red|blue) \w+/)
+show_regexp(a, / red|blue \w+/)
+
+show_regexp(a, /red (ball|angry) sky/)
+a = 'the red angry sky'
+show_regexp(a, /red (ball|angry) sky/)
+
+# 括号也收集匹配的结果。Ruby计算开始括号的数目，保存每个开始括号和相应的关闭括号之间部分匹配的结果。
+# 在模式内，\1序列指的是第一个组的匹配，\2序列指的是第二个组的匹配
+# 在模式外，特殊变量$1和$2等起到相同的作用。
+
+print "\n"*10
+puts "12:50am" =~ /(\d\d):(\d\d)(..)/
+puts "Hour is #$1, minute is #$2"
+puts "12:50am" =~ /((\d\d):(\d\d))(..)/
+puts "Time is #$1"
+puts "Hour is #$2, minute is #$3"
+puts "AM/PM is #$4"
+
+# 在匹配的剩余部分使用当前部分匹配的能力，能够让你在字符串中寻找各式各样的重复
+print "\n"*10
+show_regexp('He said "helllo"', /(\w)\1\1/)
+show_regexp('He said "Helllo"', /(\w)\1+/)
+show_regexp('Mississippi', /(\w+)\1/)
+
+# 也可以使用向后引用去匹配分界符
+print "\n"*10
+show_regexp('He said "Hello"', /(["']).*?\1/)
+show_regexp("He said 'Hello'", /(["']).*?\1/)
+show_regexp("He said \|Hello\|", /(\|).*?\1/)
+
