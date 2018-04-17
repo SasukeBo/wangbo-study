@@ -98,7 +98,113 @@ puts kind
 
 # Loops 循环
 # while 和 until
+=begin
 file = File.open("testfile")
 while line = file.gets
   puts(line) if line =~ /third/ .. line =~ /fifth/
 end
+=end
+
+File.foreach("testfile") do |line|
+  #if (($. == 1) || line =~ /eig/) .. (($. == 3) || line =~ /nin/)
+  if (($. == 1) || ($. == 8)) .. (($. == 3) || ($. == 9))
+    print line
+  end
+end
+
+# 当使用while和until做语句修饰符时，如果被修饰的语句是begin/end块，则至少执行一次块内代码！
+begin
+  print "Goodbye\n"
+end while false
+
+# Iterators迭代器
+3.times do
+  print "Ho! "
+end
+0.upto(9) do |x|
+  print x, " "
+end
+0.step(12, 3) {|x| print x, " "}
+[1, 1, 2, 3, 5].each {|val| print val, ' '}
+File.open("testfile").grep(/d$/) do |line|
+  # 正则表达式/d$/以$结尾表示尾部匹配
+  puts line
+end
+
+# Ruby还提供了内建的称谓loop的迭代器
+=begin
+loop do
+  # block ...
+end
+=end
+
+# For ... In
+=begin
+for song in songlist
+  song.paly
+end
+
+# 等价于下面这段代码
+songlist.each do |song|
+  song.play
+end
+=end
+
+for i in ['fee', 'fi', 'fo', 'fum']
+  print i, " "
+end
+for i in 1..3
+  print i, ' '
+end
+for i in File.open("testfile").find_all {|line| line =~ /d$/}
+  print i.chomp, ' '
+end
+
+print "\n"*6
+# 只要你的类支持each方法，你就可以使用for循环去遍历它的对象
+class Periods
+  def each
+    yield "Classical"
+    yield "Jazz"
+    yield "Rock"
+  end
+end
+periods = Periods.new
+for genre in periods
+  print genre, ' '
+end
+
+# Break，Redo和Next
+# 循环控制结构break，redo和next可以让你改变循环或迭代的正常流程
+print "\n"*6
+i = 0
+loop do 
+  i += 1
+  next if i < 3
+  print i
+  break if i >4
+end
+
+# redo语句使得一个循环重新执行当前迭代。
+# 而retry语句从头执行一个循环
+=begin
+for i in 1..100
+  print "Now at #{i}. Restart? "
+  retry if gets =~ /^y/i
+end
+=end
+
+print "\n"*6
+def do_until(cond)
+  if cond then break
+  else 
+    yield
+    retry
+  end
+end
+i = 0
+do_until(i > 10) do
+  print i, " "
+  i += 1
+end
+
