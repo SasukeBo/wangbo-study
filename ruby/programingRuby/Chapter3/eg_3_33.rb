@@ -9,8 +9,8 @@ class MyLogger
   end
 end
 
-# puts MyLogger.create.id
-# puts MyLogger.create.id
+# puts MyLogger.create.object_id
+# puts MyLogger.create.object_id
 
 
 # The following all define calss methods within class Demo.
