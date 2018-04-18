@@ -47,6 +47,8 @@ show_regexp(string, /is$/)
 show_regexp(string, /\Athis/)
 show_regexp(string, /\Athe/)
 show_regexp(string, /\Zis/) # 不知道\Z模式是怎么用的
+# \Z和$正确使用方式
+show_regexp(string, /time\Z/)
 string = "this is the time\n"
 show_regexp(string, /\ztime/)
 

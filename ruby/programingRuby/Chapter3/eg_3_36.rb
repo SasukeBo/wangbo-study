@@ -1,5 +1,7 @@
 # Access Control
-# If a method is private, it may be called only within the context of the calling object--it is never possible to access another object's methods directly, even if the object is of the same class as the caller.
+# If a method is private, it may be called only within the context of the 
+# calling object--it is never possible to access another object's methods directly, 
+# even if the object is of the same class as the caller.
 class MyClass
   def method1 # default is 'public'
     # ...
