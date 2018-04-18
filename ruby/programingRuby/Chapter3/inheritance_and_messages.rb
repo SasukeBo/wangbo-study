@@ -4,7 +4,10 @@ require 'Song.rb'
 class KaraokeSong < Song  #此处<号类似于Java的extends
   def initialize(name, artist, duration, lyrics)
     super(name, artist, duration)
-    @lyrisc = lyrics
+    @lyrics = lyrics
+  end
+  def to_s
+    super + " #@lyrics"
   end
 end
 

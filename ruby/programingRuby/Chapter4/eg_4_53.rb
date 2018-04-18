@@ -1,10 +1,12 @@
 # start_button = Button.new("Start")
 # pause_button = Button.new("Pause")
 
-class StartButton < Button
+class StartButton # < Button
+=begin
   def initialize
     super("Start")
   end
+=end
   def button_pressed
     puts "Start button pressed"
   end

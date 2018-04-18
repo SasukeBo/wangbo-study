@@ -3,7 +3,7 @@
 # 将相关的例程组成一个库是合适的。这样这些代码可以被其他不同Ruby程序共享。
 # 不同代码段可能会有命名冲突，而模块定义了一个namespace可以解决这个问题
 # 例如
-=begin
+
 module Trig
   PI = 3.141592654
   def Trig.sin(x)
@@ -172,7 +172,7 @@ c1.state = 'cat'
 c2.state = 'dog'
 puts c1.state
 puts c2.state
-=end
+
 # 9.5 包含其他文件
 # Ruby 有两个语句来完成文件导入
 # load方法，每次load都会将指定的Ruby源文件包含进来
