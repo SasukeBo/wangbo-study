@@ -21,8 +21,8 @@ print digits.reject {|i| i < 5 }, " \n"
 # 区间也可以当做条件表达式使用。
 while line = gets
   if line =~ /start/ .. line =~ /end/ then
-  puts line
-  break
+    puts line
+    break
   end
 end
 
