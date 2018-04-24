@@ -14,10 +14,8 @@ class UsersController < ApplicationController
     @user = User.create(user_params)
     if @user.save
       # redirect_to :sessions_new # 用户信息保存成功后，跳转到登录页面
-      puts "UsersController 14行"
       redirect_to users_url, alert: "You have successfully registed."
     else
-      puts "UsersController 17行"
       render new_user_path
     end
   end
