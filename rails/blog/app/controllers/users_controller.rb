@@ -16,18 +16,12 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       # redirect_to :sessions_new # 用户信息保存成功后，跳转到登录页面
-<<<<<<< HEAD
       # 处理注册成功的情况
       log_in @user
       flash[:success] = "欢迎来到Weblog"
       redirect_to @user
     else
       render 'new'
-=======
-      redirect_to users_url, alert: "You have successfully registed."
-    else
-      render new_user_path
->>>>>>> 0559c8d61bb3a486d11e8ef139b6d61f452fd4fd
     end
   end
 

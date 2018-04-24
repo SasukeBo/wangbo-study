@@ -11,14 +11,8 @@ Rails.application.routes.draw do
   resources :articles do
     resources :comments
   end
-
-  resources :users do
-    resources :articles
-  end
-
-  resources :categroies do
-    resources :articles
-  end
+  resources :users
+  resources :categroies
 
 
 
