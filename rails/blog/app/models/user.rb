@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   attr_accessor :remember_token
   has_many :articles, dependent: :destroy
   validates :nick_name, presence: true
-  validates :username, presence: true, 
+  validates :username, presence: true,
     length: { minimum: 5, maximum: 20 },
     uniqueness: true
   validates :password, presence: true,
@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   def User.new_token
     SecureRandom.urlsafe_base64
   end
-  
+
   # 为了持久会话，在数据库中记住用户。
   def remember
     self.remember_token = User.new_token

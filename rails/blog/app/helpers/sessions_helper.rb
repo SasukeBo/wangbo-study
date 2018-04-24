@@ -2,16 +2,21 @@ module SessionsHelper
   # 登入指定用户
   def log_in(user)
     session[:user_id] = user.id
+    # 会在用户的浏览器中创建一个临时的cookie
+    # 内容是加密后的用户ID
+    # 可以使用session[:user_id]取回这个ID，但是是加密后的ID
   end
 
   # 返回当前登录的用户（如果有的话）
   def current_user
     if (user_id = session[:user_id])
       @current_user ||= User.find_by(id: user_id)
+      # 把User.find_by的结果存储在实例变量中，
+      # 只在第一次调用current_user时查询数据库。
     elsif (user_id = cookies.signed[:user_id])
       user = User.find_by(id: user_id)
       if user && user.authenticated?(cookies[:remember_token])
-        lo_in user
+        log_in user
         @current_user = user
       end
     end
