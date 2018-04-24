@@ -472,3 +472,5 @@ Client.select(:id, :name).map { |c| [c.id, c.name] }
 Client.pluck(:id)
 # 或
 Client.pluck(:id, :name)
+# 和select方法不同，pluck方法把数据库查询结果直接做为Ruby数组，而不是构建
+# ActiveRecord对象。这意味着对于大型查询或常用查询，pluck方法的性能更好。

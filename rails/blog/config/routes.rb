@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
-  get 'welcome/index'
-  root 'welcome#home'
-  # root 'welcome#index'
-  post 'user/create'
+  get  'login' => 'sessions#new'
+  post 'login' => 'sessions#create'
+  delete 'logout' => 'sessions#destroy'
   
+  get  'welcome/index'
+  root 'welcome#home'
+  post 'user/create'
+  get 'user/show'
 
   resources :articles do
     resources :comments

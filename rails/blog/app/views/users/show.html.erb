@@ -1,11 +1,13 @@
-<!DOCTYPE html>
-<html>
-  <%= render 'layouts/head'%>
-  <body>
-    <%= render 'layouts/header'%>
-    <div class="container">
-    <%= @user.nick_name %>, <%= @user.email %>
-    <%= render 'layouts/footer'%>
+<% provide(:title, '我的信息')%>
+  <div class="container">
+    <div class="row">
+      <aside class="clo-md-4">
+        <section class="user_info">
+          <h1>
+            <%= @user.nick_name %>
+            <%= @user.email %>
+          </h1>
+        </section>
+      </aside>
     </div>
-  </body>
-</html>
+  </div>

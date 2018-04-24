@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= yield(:title) %> | Weblog </title>
+    <%= stylesheet_link_tag 'application', media: 'all',
+    'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js">
+      </script>
+    <![endif]-->
+  </head>
+  <body>
+    <%= render 'shared/header'%>
+    <div class="container">
+      <% flash.each do |message_type, message| %>
+        <div class="alert alert-<%= message_type %>"><%= message %></div>
+      <% end %>
+      <%= yield %>
+      <%# 这行代码的作用是，把每个页面的内容插入到布局中。例如我们在访问/home时
+      会把home.html.reb中的内容转换成HTML，然后插入到yield所在的位置%>
+      <%= render 'shared/footer'%>
+    </div>
+  </body>
+</html>

@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  include SessionsHelper
   def show
     @user = User.find(params[:id])
   end
@@ -11,14 +12,15 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.create(user_params)
+    @user = User.new(user_params)
     if @user.save
       # redirect_to :sessions_new # 用户信息保存成功后，跳转到登录页面
-      puts "UsersController 14行"
-      redirect_to users_url, alert: "You have successfully registed."
+      # 处理注册成功的情况
+      log_in @user
+      flash[:success] = "欢迎来到Weblog"
+      redirect_to @user
     else
-      puts "UsersController 17行"
-      render new_user_path
+      render 'new'
     end
   end
 
@@ -32,6 +34,6 @@ class UsersController < ApplicationController
       :email,
       :phone_num,
       :sex,
-      :encrypted_password)
+      :password_confirmation)
   end
 end
