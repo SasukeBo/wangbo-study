@@ -53,6 +53,15 @@ p {
   color: #fff;
   text-decoration: none;
 }
+
+li.current-user {
+  padding: 5px 18px;
+}
+
+.user-name {
+  display: block;
+}
+
 footer {
   margin-top: 45px;
   padding-top: 5px;

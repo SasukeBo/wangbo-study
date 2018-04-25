@@ -11,6 +11,13 @@
                 我的账号<b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
+                <li class="current-user">
+                  <div class="user-name bold">
+                     <%= current_user.nick_name %>
+                  </div>
+                  @<%= current_user.username %>
+                </li>
+                <li class="divider"></li>
                 <li><%= link_to "我的信息", current_user %></li>
                 <li><%= link_to "我的文章", articles_path %></li>
                 <li><%= link_to "修改信息", edit_user_path(current_user) %></li>
