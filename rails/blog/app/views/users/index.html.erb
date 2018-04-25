@@ -1,1 +1,13 @@
-<h1>注册成功请登录</h1>
+<% provide(:title, "所有用户") %>
+<h1>所有用户</h1>
+
+<%= will_paginate %>
+
+<ul class="users">
+  <%= render @users %>
+  <%# Rails 会把@users当做一个User对象列表传递给render方法，然后自动遍历
+  这个列表，使用局部视图_user.html.erb渲染每个对象%>
+</ul>
+
+<%= will_paginate %>
+<ul class="users"><li>用户总数：<%= @users.count %><br></li></ul>
