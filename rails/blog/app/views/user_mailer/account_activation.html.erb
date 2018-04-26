@@ -1,5 +1,11 @@
-<h1>UserMailer#account_activation</h1>
+<h1>Weblog</h1>
+
+<p>Welcome,<%= @user.username %>,</p>
 
 <p>
-  <%= @greeting %>, find me in app/views/user_mailer/account_activation.html.erb
+  Please click on the link below to activate your account:
 </p>
+
+<%= link_to "Activate", edit_account_activation_url(@user.activation_token,
+  email: @user.email) %>
+Your email is <%= @user.email %>

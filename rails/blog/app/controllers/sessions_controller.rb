@@ -5,9 +5,16 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by(username: params[:session][:username])
     if user && user.authenticate(params[:session][:password])
-      log_in user
-      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-      redirect_back_or user # 加入友好转向
+      if user.activated?
+        log_in user
+        params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+        redirect_back_or user # 加入友好转向
+      else
+        message = "账号未激活，"
+        message += "请查看您的邮箱，激活账号！"
+        flash[:warning] = message
+        redirect_to root_url
+      end
     else
       flash.now[:danger] = '错误的Username或password!'
       render 'new'

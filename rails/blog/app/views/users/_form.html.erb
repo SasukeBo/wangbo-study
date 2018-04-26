@@ -2,28 +2,32 @@
   <%= render 'shared/error_messages'%>
 
   <%= f.label :"昵称" %><br>
-  <%= f.text_field :nick_name %>
-  
+  <%= f.text_field :nick_name, class: 'form-control' %>
+
   <%= f.label :"用户名" %><br>
-  <%= f.text_field :username %>
-  
+  <%= f.text_field :username, class: 'form-control' %>
+
   <%= f.label :"密码" %><br>
-  <%= f.password_field :password %>
-  
+  <%= f.password_field :password, class: 'form-control' %>
+
   <%= f.label :password_confirmation, "确认密码" %><br>
-  <%= f.password_field :password_confirmation %>
-  
+  <%= f.password_field :password_confirmation, class: 'form-control' %>
+
   <%= f.label :"邮箱" %><br>
-  <%= f.text_field :email %>
-  
+  <%= f.text_field :email, class: 'form-control' %>
+
   <%= f.label :"手机号" %><br>
-  <%= f.text_field :phone_num %>
-  
-  <%= f.label :"性别" %><br>
-  <%= f.radio_button(:sex, "1") %>
-  <%= f.label(:sex_1, "男") %>
-  <%= f.radio_button(:sex, "0") %>
-  <%= f.label(:sex_0, "女") %>
-  
+  <%= f.text_field :phone_num, class: 'form-control' %>
+  <%= f.label :"性别" %>
+  <table width="100" class="field">
+    <tr>
+      <td width="20%"><%= f.label(:sex_1, "男") %></td>
+      <td width="20%"><%= f.radio_button(:sex, "1") %></td>
+      <td width="20%"></td>
+      <td width="20%"><%= f.label(:sex_0, "女") %></td>
+      <td width="20%"><%= f.radio_button(:sex, "0") %></td>
+    </tr>
+  </table>
+  <br>
   <%= f.submit :"提交", class: "btn btn-primary" %>
 <% end %>

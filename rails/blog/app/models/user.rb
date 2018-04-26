@@ -1,8 +1,10 @@
 class User < ActiveRecord::Base
-  attr_accessor :remember_token, :activation_token
+  attr_accessor :remember_token, :activation_token, :reset_token
   before_save :downcase_email
   before_create :create_activation_digest
+
   has_many :articles, dependent: :destroy
+
   validates :nick_name, presence: true
   validates :username, presence: true,
     length: { minimum: 5},
@@ -36,14 +38,51 @@ class User < ActiveRecord::Base
   end
 
   # 如果指定的令牌和摘要匹配，返回true
+=begin
   def authenticated?(remember_token)
     return false if remember_digest.nil?
     BCrypt::Password.new(remember_digest).is_password?(remember_token)
+  end
+=end
+
+  def authenticated?(attribute, token)
+    digest = send("#{attribute}_digest")
+    return false if digest.nil?
+    BCrypt::Password.new(digest).is_password?(token)
   end
 
   def forget
     update_attribute(:remember_digest, nil)
   end
+
+  # 激活账户
+  def activate
+    update_attribute(:activated, true)
+    update_attribute(:activated_at, Time.zone.now)
+  end
+
+  # 发送激活邮件
+  def send_activation_email
+    UserMailer.account_activation(self).deliver_now
+  end
+
+  # 设置密码重设相关的属性
+  def create_reset_digest
+    self.reset_token = User.new_token
+    update_attribute(:reset_digest, User.digest(reset_token))
+    update_attribute(:reset_send_at, Time.zone.now)
+  end
+
+  # 发送密码重设邮件
+  def send_password_reset_email
+    UserMailer.password_reset(self).deliver_now
+  end
+
+  # 如果重设密码超时，返回true
+  def password_reset_expired?
+    reset_send_at < 2.minutes.ago
+  end
+
 
   private
 

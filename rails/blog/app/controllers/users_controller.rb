@@ -22,10 +22,17 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+=begin
       # 用户信息保存成功后，跳转到登录页面
       log_in @user
       flash[:success] = "欢迎来到Weblog"
       redirect_to @user
+=end
+      # UserMailer.account_activation(@user).deliver_now
+      # 将发送验证邮件功能移到user model中。
+      @user.send_activation_email
+      flash[:info] = "请在您的邮箱里激活您的Weblog账号。"
+      redirect_to root_url
     else
       render 'new'
     end

@@ -19,3 +19,4 @@
 /app/.DS_Store
 /app/assets/.DB_Store
 /app/assets/images/.keep
+sendgrid.env
