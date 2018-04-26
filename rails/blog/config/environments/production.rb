@@ -81,7 +81,7 @@ Rails.application.configure do
   config.action_mailer.default :charset => "utf-8"
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = { host: "75040d8c.ngrok.io" }
+  config.action_mailer.default_url_options = { host: "4071cdda.ngrok.io" }
   config.action_mailer.stmp_settings = {
     address: "smtp.sendgrid.net",
     port: 25,

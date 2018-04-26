@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   get 'password_resets/new'
 
   get 'password_resets/edit'
+  # 测试邮件发送
+  get '/test/reset_password', to: 'test#reset_password'
 
   get  'login' => 'sessions#new'
   post 'login' => 'sessions#create'
