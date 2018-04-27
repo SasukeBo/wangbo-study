@@ -9,6 +9,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @microposts = @user.microposts.paginate(page: params[:page])
   end
 
   def new
@@ -70,15 +71,6 @@ class UsersController < ApplicationController
         :phone_num,
         :sex,
         :password_confirmation)
-    end
-
-    # 未登录用户访问编辑用户信息页面需要被重定向到登录界面
-    def logged_in_user
-      unless logged_in?
-        store_location
-        flash[:danger] = "请先登录"
-        redirect_to login_url
-      end
     end
 
     # 确保当前用户只能编辑自己的个人信息

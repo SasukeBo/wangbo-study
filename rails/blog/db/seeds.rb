@@ -11,7 +11,7 @@
 
 
 
-
+=begin
 # 用于批量录入数据库测试数据
 99.times do |n|
   n += 27
@@ -31,5 +31,12 @@
     phone_num: phone_num,
     sex: sex
   )
+end
+=end
+
+users = User.order(:id).take(6)
+50.times do
+  content = Faker::Lorem.sentence(5)
+  users.each { |user| user.microposts.create!(content: content) }
 end
 

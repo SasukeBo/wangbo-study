@@ -8,7 +8,9 @@ class SessionsController < ApplicationController
       if user.activated?
         log_in user
         params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-        redirect_back_or user # 加入友好转向
+        # redirect_back_or user # 加入友好转向
+        flash[:success] = "登录成功， 欢迎您#{user.nick_name}"
+        redirect_to root_path
       else
         message = "账号未激活，"
         message += "请查看您的邮箱，激活账号！"

@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   before_create :create_activation_digest
 
   has_many :articles, dependent: :destroy
+  has_many :microposts, dependent: :destroy
 
   validates :nick_name, presence: true
   validates :username, presence: true,
@@ -80,7 +81,11 @@ class User < ActiveRecord::Base
 
   # 如果重设密码超时，返回true
   def password_reset_expired?
-    reset_send_at < 2.minutes.ago
+    reset_send_at < 5.minutes.ago
+  end
+
+  def feed
+    Micropost.where(user_id: id)
   end
 
 

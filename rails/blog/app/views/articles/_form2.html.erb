@@ -1,4 +1,4 @@
-<%= form_for @article, url: user_articles_path do |f| %>
+<%= form_for @article, url: user_article_path do |f| %>
   <% if @article.errors.any? %>
     <div id="error_explanation">
       <h2>
@@ -16,13 +16,13 @@
 
   <p>
     <%= f.label :title %><br>
-    <%= f.text_field :title, class: 'form_control'%>
+    <%= f.text_field :title, class: 'form-control' %>
   </p>
   <p>
     <%= f.label :text %><br>
-    <%= f.text_area :text, class: 'form_control' %>
+    <%= f.text_area :text, class: 'form-control' %>
   </p>
   <p>
-    <%= f.submit :保存文章, class: "btn btn-primary" %>
+    <%= f.submit :保存修改, class: "btn btn-primary"  %>
   </p>
 <% end %>
