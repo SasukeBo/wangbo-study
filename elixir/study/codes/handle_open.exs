@@ -3,5 +3,5 @@ handle_open = fn
   {_, error} -> "Error: #{:file.format_error(error)}"
 end
 
-IO.puts handle_open.(File.open("README.md"))
-IO.puts handle_open.(File.open("NOTEXITS.file"))
+IO.puts(handle_open.(File.open("README.md")))
+IO.puts(handle_open.(File.open("NOTEXITS.file")))
