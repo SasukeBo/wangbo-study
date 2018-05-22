@@ -6,5 +6,6 @@ defmodule MyEnum do
       filter(tail, func)
     end
   end
-  def filter([], _func), do: ''
+
+  def filter([], _func), do: []
 end
