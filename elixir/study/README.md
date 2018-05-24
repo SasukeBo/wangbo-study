@@ -21,5 +21,5 @@
 
 ## 练习Elixir项目
 
-[Issues项目](/issues)
+[Issues项目](issues/)
 
