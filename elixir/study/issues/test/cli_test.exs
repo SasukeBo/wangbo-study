@@ -26,7 +26,7 @@ defmodule CliTest do
   defp fake_created_at_list(values) do
     data =
       for value <- values,
-      do: [{"created_at", value}, {"other_data", "xxx"}] |> IO.inspect
+          do: [{"created_at", value}, {"other_data", "xxx"}] |> IO.inspect()
 
     convert_to_list_of_maps(data)
   end

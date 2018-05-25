@@ -12,10 +12,10 @@ defmodule Issues.CLI do
   #   parse_args(argv)
   # end
 
-  def run(argv) do
+  def main(argv) do
     argv
-      |> parse_args
-      |> process
+    |> parse_args
+    |> process
   end
 
   @doc """
@@ -34,12 +34,11 @@ defmodule Issues.CLI do
 
       {_, [user, project, count], _} ->
         {user, project,
-          if is_binary(count) do
-            String.to_integer(count)
-          else
-            count
-          end
-        }
+         if is_binary(count) do
+           String.to_integer(count)
+         else
+           count
+         end}
 
       {_, [user, project], _} ->
         {user, project, @default_count}
@@ -50,9 +49,10 @@ defmodule Issues.CLI do
   end
 
   def process(:help) do
-    IO.puts """
+    IO.puts("""
     usage: issues <user> <project> [count | #{@default_count}]
-    """
+    """)
+
     System.halt(0)
   end
 
@@ -69,18 +69,20 @@ defmodule Issues.CLI do
 
   def decode_response({:error, error}) do
     {_, message} = List.keyfind(error, "message", 0)
-    IO.puts "Error fetching from Github: #{message}"
+    IO.puts("Error fetching from Github: #{message}")
     System.halt(2)
   end
 
   def convert_to_list_of_maps(list) do
     list
-    |> Enum.map(&Enum.into(&1, Map.new))
+    |> Enum.map(&Enum.into(&1, Map.new()))
   end
 
   def sort_into_ascending_order(list_of_issues) do
-    Enum.sort list_of_issues,
+    Enum.sort(
+      list_of_issues,
       fn i1, i2 -> i1["created_at"] <= i2["created_at"] end
+    )
   end
 
   # 现在使用书本教程的函数来处理数据，先注释掉我自己写的函数以免混乱
