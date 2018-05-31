@@ -40,6 +40,69 @@ end
 其中`@moduledoc`是用来添加模块文档，`@doc`用来为一个方法添加文档。
 除此之外还有一个`@typedoc`可以为type添加文档。
 
+### 函数标准说明(Function specifications)
+
+通常Elixir提供一些基础的数据类型，例如integer或者pid，当我们书写函数文档时，会介绍
+函数接收的参数类型以及返回的参数类型。例如：
+
+```elixir
+@spec to_list(t()) :: [element()]
+```
+
+这表示Enum.to_list函数接收参数类型是t，而查阅文档可以看到对应关系`@type t :: Enumerable.t()`，
+而返回的数据是element()类型的。
+
+* 用户自定义类型
+
+由于Elixir提供了很多内置类型，基于此自定义类型是很方便的。
+例如这里有一个模块`LousyCalculator`，处理一些常见的算术运算，但是这些算术运算函数
+返回的是元组，包含了运算结果和一段对应的字符串:
+
+```elixir
+defmodule LousyCalculator do
+  @spec add(number, number) :: {number, String.t}
+  def add(x, y), do: {x + y, "You need a calculator to do that?!"}
+
+  @spec multiply(number, number) :: {number, String.t}
+  def multiply(x, y), do: {x * y, "Jeez, come on!"}
+end
+```
+如上所示，返回值类型是一个由number和String.t构成的元组。（了解更多String.t而不是String，请
+点击[notes in the typespecs docs](https://hexdocs.pm/elixir/typespecs.html#notes)）
+
+以这种方式定义函数的返回值是有效的，但是却渐渐被`@type`定义返回值类型的手段所取代。
+请看下面的代码：
+
+```elixir
+defmodule LousyCalculator do
+  @typedoc """
+  Just a number followed by a string.
+  """
+  @type number_with_remark :: {number, String.t}
+
+  @spec add(number, number) :: number_with_remark
+  def add(x, y), do: {x + y, "You need a calculator to do that?"}
+
+  @spec multiply(number, number) :: number_with_remark
+  def multiply(x, y), do: {x * y, "It is like addition on steroids."}
+end
+```
+
+这里使用了`@type`定义`number_with_remark`来替代`{number, String.t}`。
+用`@typedoc`对自定义的类型做了解释。
+
+并且，这种自定义的类型还可以在模块外部被调用：
+
+```elixir
+defmodule QuietCalculator do
+@spec make_quiet(LousyCalculator.number_with_remark) :: number
+  defp make_quiet({num, _remark}), do: num
+end
+```
+
+如果你想定义一个私有的type，请使用`@typep`。
+
+
 ### 文档书写规范建议
 
 * 保证文档的第一段简明扼要，一般只写一行，像ExDoc这样的工具一般都用第一行去生成一个总结。
