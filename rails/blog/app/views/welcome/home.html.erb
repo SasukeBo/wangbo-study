@@ -1,13 +1,25 @@
-<!DOCTYPE html>
-<html>
-  <%= render 'layouts/head'%>
-<body>
-  <%= render 'layouts/header'%>
-  <div class="container">
-    <%= yield %>
-  <%= render 'welcome/home'%>
-  <%= render 'layouts/footer'%>
-  <%= debug(params) if Rails.env.development? %>
+<% provide(:title, "首页")%>
+<% if logged_in? %>
+  <div class="row">
+    <aside class="col-md-4">
+      <section class="user_info">
+        <%= render 'shared/user_info' %>
+      </section>
+      <section class="micropost_form">
+        <%= render 'shared/micropost_form' %>
+      </section>
+    </aside>
   </div>
-</body>
-</html>
+<% else %>
+    <div class="center jumbotron">
+      <h1>欢迎来到 Weblog App</h1>
+
+      <h2>
+      这是Weblog首页，基于Rails的WebApp
+      </h2>
+
+      <%= link_to "Sign up now!", new_user_path, class: "btn btn-lg btn-primary" %>
+    </div>
+    <%= link_to image_tag("rails.png", alt: "Rails logo"),
+            'http://rubyonrails.org/' %>
+<% end %>

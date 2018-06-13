@@ -1,23 +1,29 @@
 Rails.application.routes.draw do
-  get 'welcome/index'
-  root 'welcome#home'
-  # root 'welcome#index'
-  post 'user/create'
-  
+  get 'password_resets/new'
 
-  resources :articles do
-    resources :comments
-  end
+  get 'password_resets/edit'
+  # 测试邮件发送
+  get '/test/reset_password', to: 'test#reset_password'
+
+  get  'login' => 'sessions#new'
+  post 'login' => 'sessions#create'
+  delete 'logout' => 'sessions#destroy'
+
+  get  'welcome/index'
+  get 'welcome/home' => 'welcome#home'
+  root 'welcome#home'
+  post 'user/create'
+  get 'user/show'
 
   resources :users do
-    resources :articles
+    resources :articles do
+      resources :comments
+    end
   end
-
-  resources :categroies do
-    resources :articles
-  end
-
-
+  resources :categroies
+  resources :account_activations, only: [:edit]
+  resources :password_resets, only: [:edit, :create, :new, :update]
+  resources :microposts, only: [:create, :destroy]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

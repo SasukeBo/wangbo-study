@@ -1,21 +1,12 @@
-<!DOCTYPE html>
-<html>
-  <%= render 'layouts/head'%>
-  <body>
-    <%= render 'layouts/header'%>
+<% provide(:title, "注册")%>
+  <div class="container">
+    <h1>Sign up</h1>
     <div class="container">
-      <h1>注册</h1>
-      <% if @user.errors.any? %>
-      <ul>
-        <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-        <% end %>
-      </ul>
-      <% end %>
-      <div class="container">
-        <%= render 'form'%>
-        <%= link_to '返回', articles_path %>
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <%= render 'form'%>
+          <%= link_to '返回', root_path %>
+        </div>
       </div>
     </div>
-  </body>
-</html>
+  </div>

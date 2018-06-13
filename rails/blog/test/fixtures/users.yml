@@ -1,17 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  nick_name: MyString
-  username: MyString
-  password: MyString
-  email: MyString
-  phone_num: MyString
+  nick_name: "邮件测试用户"
+  username: "MailerTest"
+  password_digest: <%= User.digest('password') %>
+  email: "809754210@qq.com"
+  phone_num: 13242931765
   sex: 1
 
 two:
   nick_name: MyString
   username: MyString
-  password: MyString
+  password_digest: MyString
   email: MyString
   phone_num: MyString
   sex: 1

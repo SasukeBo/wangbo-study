@@ -1,4 +1,12 @@
-<h1>Editing article</h1>
-
-<%= render 'form' %>
-<%= link_to 'Back', articles_path %>
+<% provide(:title, "修改文章")%>
+  <div class="container">
+    <h1>Editing article</h1>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <%= render 'form2' %>
+          <%= link_to 'Back', user_articles_path %>
+        </div>
+      </div>
+    </div>
+  </div>
