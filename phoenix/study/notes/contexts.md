@@ -32,3 +32,128 @@
 
 再添加credentials到web层之前，我们首先需要让context知道如何关联user和credentials。
 
+```elixir
+# user.ex
+- alias Hello.Accounts.User
++ alias Hello.Accounts.{User, Credential}
+
+
+  schema "users" do
+    field :name, :string
+    field :username, :string
++   has_one :credential, Credential
+
+    timestamps()
+  end
+```
+
+我们使用has_one宏来定义User和Credential之间的父子关系。
+然后还需要修改credential.ex文件：
+
+```elixir
+# credential.ex
+- alias Hello.Accounts.Credential
++ alias Hello.Accounts.{Credential, User}
+
+
+  schema "credentials" do
+    field :email, :string
+-   field :user_id, :id
++   belongs_to :user, User
+
+    timestamps()
+  end
+```
+
+最后我们去修改accounts.ex文件
+
+```elixir
+  def list_users do
+    User
+    |> Repo.all()
+    |> Repo.preload(:credential)
+  end
+
+  def get_user!(id) do
+    User
+    |> Repo.get!(id)
+    |> Repo.preload(:credential)
+  end
+```
+
+添加`preload`使得只要访问user就会预加载credential，不必担心在没有请求credential
+数据时无法得到用户相关的其他数据。
+
+接下来我们在增加用户的表单中去添加credential的input。
+
+templates/user/form.html.eex
+
+```html
++ <div class="form-group">
++   <%= inputs_for f, :credential, fn cf -> %>
++     <%= label cf, :email, class: "control-label" %>
++     <%= text_input cf, :email, class: "form-control" %>
++     <%= error_tag cf, :email %>
++   <% end %>
++ </div>
+```
+
+`inputs_for`将input绑定到父表单。
+然后我们再去show页面添加显示用户邮箱的代码
+
+```html
++ <li>
++   <strong>Email:</strong>
++   <%= @user.credential.email %>
++ </li>
+</ul>
+```
+
+我们还需要修改accounts.ex的部分代码：
+
+```elixir
+- alias Hello.Accounts.User
++ alias Hello.Accounts.{User, Credential}
+  ...
+
+  def update_user(%User{} = user, attrs) do
+    user
+    |> User.changeset(attrs)
++   |> Ecto.Changeset.cast_assoc(:credential, with: &Credential.changeset/2)
+    |> Repo.update()
+  end
+
+  def create_user(attrs \\ %{}) do
+    %User{}
+    |> User.changeset(attrs)
++   |> Ecto.Changeset.cast_assoc(:credential, with: &Credential.changeset/2)
+    |> Repo.insert()
+  end
+  ...
+
+- alias Hello.Accounts.Credential
+```
+需要添加cast_assoc，大概是关联获取表单输入的数据，如果没有这行，从表单接受的数据将
+永远忽略email。with选项则是指明数据验证需要使用`Credential.chengeset`方法。
+
+## Adding Account functions
+
+试着写写用户登录验证的功能。
+
+修改accounts.ex文件
+
+```elixir
+def authenticate_by_email_password(email, _password) do
+  query =
+    from u in User,
+      inner_join: c in assoc(u, :credential),
+      where: c.email == ^email
+
+  case Repo.one(query) do
+    %User{} = user -> {:ok, user}
+    nil -> {:error, :unauthorized}
+  end
+end
+```
+
+添加登录页面之前先添加会话控制器`session_controller.ex`
