@@ -3,8 +3,19 @@ defmodule HelloWeb.HelloController do
 
   plug :assign_welcome_message, "Hi!" when action in [:show]
 
-  def index(conn, params // %{"message" => "Hi!", "name" => "Sasuke"}) do
+  def index(conn, params) do
     # render conn, "index.html"
+    # case params do
+    #   %{"message" => _, "name" => _} -> params
+    #   _ -> params = %{"message" => "Hi!",
+    #                   "name" => "Sasuke"}
+    # end
+
+    params =
+      case Map.equal?(params, %{}) do
+        true -> %{"message" => "Hi!", "name" => "Sasuke"}
+        false -> params
+      end
     conn
     # |> assign(:message, "Welcome Back!")
     |> assign(:message, params["message"])

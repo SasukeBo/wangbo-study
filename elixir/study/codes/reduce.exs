@@ -1,4 +1,5 @@
 defmodule MyList do
+  # reduce 归纳为
   def reduce([], value, _) do
     value
   end

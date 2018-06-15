@@ -50,7 +50,9 @@ defmodule HelloWeb.PageController do
     render conn, "test.html"
   end
 
-  # def redirect_test(conn, _params) do
-  #   text conn, "Redirect Succeed!"
-  # end
+  def redirect_test(conn, _params) do
+    # text conn, "Redirect Succeed!"
+    # 重定向到别的控制器下的页面需要指定View
+    render conn, HelloWeb.HelloView, :index, [message: "redirect from :", name: "PageController"]
+  end
 end
