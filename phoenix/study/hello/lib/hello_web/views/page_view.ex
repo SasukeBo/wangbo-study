@@ -3,7 +3,6 @@ defmodule HelloWeb.PageView do
   # def render("index.html", assigns) do # 这里的assigns就是controller中调用render时传入的参数
   #   "rendering with assigns #{inspect Map.keys(assigns)} #{assigns[:message]}"
   # end
-
   def message do
     "Hello from the view!"
   end
