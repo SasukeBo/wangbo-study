@@ -6,6 +6,8 @@
 import {Socket} from "phoenix"
 
 let socket = new Socket("/socket", {params: {token: window.userToken}})
+// 此处的params就是UserSocket中的connect方法接收到的params
+// let socket = new Socket("/socket", {params: {token: window.userToken, user_id: "123"}})
 
 // When you connect, you'll often need to authenticate the client.
 // For example, imagine you have an authentication plug, `MyAuth`,
