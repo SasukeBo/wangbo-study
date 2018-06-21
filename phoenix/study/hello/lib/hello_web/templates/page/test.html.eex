@@ -1,0 +1,12 @@
+<div class="jumbotron">
+  <p><%= handler_info @conn %></p>
+
+  <p></p>
+
+  <h3>Keys for the conn Struct</h3>
+
+  <%= for key <- connection_keys @conn do %>
+    <% # view中的render不同于controller中的render %>
+    <%= render HelloWeb.SharedView, "key.html", key: key %>
+  <% end %>
+</div>

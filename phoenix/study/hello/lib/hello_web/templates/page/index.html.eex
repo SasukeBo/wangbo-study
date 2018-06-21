@@ -1,0 +1,4 @@
+<h1>Welcome to Phoenix!</h1>
+<a href="/sessions/new">登录</a>
+<div id="messages"></div>
+<input id="chat-input" type="text"></input>
