@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title><%= title() %></title>
+    <title>Hello Hello!</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
@@ -27,7 +27,6 @@
 
       <main role="main">
         <%= render @view_module, @view_template, assigns %>
-        <% # 文档地址：https://hexdocs.pm/phoenix/Phoenix.View.html#render/3-layouts %>
       </main>
 
     </div> <!-- /container -->
