@@ -8,9 +8,11 @@ defmodule Issues.Application do
   def start(_type, _args) do
     import Supervisor.Spec, warn: false
 
-    IO.puts "application start!"
+    IO.puts("application start!")
+
     children = [
-      Plug.Adapters.Cowboy.child_spec(scheme: :http, plug: MyRouter, options: [port: 4001])
+      Plug.Adapters.Cowboy.child_spec(scheme: :http, plug: MyRouter, options: [port: Application.get_env(:issues, :port)]),
+      Issue.Supervisor,
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
