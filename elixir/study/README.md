@@ -13,6 +13,7 @@
 * [字符串与二进制型](notes/第11章.字符串与二进制型.md)
 * [控制流](notes/第12章.控制流.md)
 * [组织项目](notes/第13章.组织项目.md)
+* [Supervisor](notes/学习Supervisor机制.md)
 
 
 ## 练习代码和部分示例代码

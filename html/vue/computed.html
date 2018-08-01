@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <title>学习Vue.js</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+    <style type="text/css">
+      .active {
+        color: blue;
+      }
+      .text-danger {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="example">
+      <p>Original message: "{{ message }}"</p>
+      <p>Computed reversed message: "{{ reversedMessage }}"</p>
+      <p>不会的就<a href='www.baidu.com'>百度</a>, 百度</p>
+      <p>Revered message: "{{ reversedMessage1() }}"</p>
+      <p> time is "{{ now() }}"</p>
+    </div>
+
+    <div id="demo">{{ fullName }}</div>
+    <div id="demo2">{{ fullName }}</div>
+
+    <div id="watch-example">
+      <p>
+        Ask a yes/no question:
+        <input v-model='question'>
+      </p>
+      <p>{{ answer }}</p>
+    </div>
+
+    <div id="demo3" v-bind:class="{ active: isActive, 'text-danger': hasError }">
+      <p>这是什么颜色</p>
+    </div>
+
+    <div id="demo4">
+      <p v-bind:style="{ color: activeColor, 'font-size': fontSize + 'px' }">随便写点什么</p>
+      <p v-bind:style="styleObject">随便写点啥</p>
+      <p v-bind:style="[styleObject, overridingStyles]">随便写点东西</p>
+    </div>
+
+    <a href="./hello.html">返回上一页</a>
+    <a href="./conditional.html">前往下一页</a>
+    <script src="computed.js"></script>
+  </body>
+</html>

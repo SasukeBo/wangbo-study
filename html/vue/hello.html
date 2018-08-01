@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <title>学习Vue.js</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      {{ message }}
+    </div>
+
+    <div id="app-2">
+      <span v-bind:title="message">
+        鼠标悬停查看提示
+      </span>
+    </div>
+
+    <div id="app-3">
+      <p v-if="seen">现在你看到我了</p>
+    </div>
+
+    <div id="app-4">
+      <ol>
+        <li v-for="todo in todos">
+          {{ todo.text }}
+        </li>
+      </ol>
+    </div>
+
+    <div id="app-5">
+      <p>{{ message }}</p>
+      <button v-on:click="reverseMessage">reverse the message</button>
+    </div>
+
+    <div id="app-6">
+      <p>{{ message }}</p>
+      <input v-model="message">
+    </div>
+
+    <div id="app-7">
+      <ol>
+        <todo-item
+          v-for="item in groceryList"
+          v-bind:todo="item"
+          v-bind:key="item.id">
+        </todo-item>
+      </ol>
+    </div>
+
+    <div id="freeze">
+      <p>{{ foo }}</p>
+      <button v-on:click="foo = 'baz'">Change it</button>
+    </div>
+
+    <div id="rawhtml">
+      <p> Using mustaches: {{ rawHtml }}</p>
+      <p> Using v-html directive: <span v-html="rawHtml"></span></p>
+    </div>
+
+    <div id="once">
+      <span v-once>这个将不会改变：{{ msg }}</span>
+      <span>这个可以改变：{{ msg2 }}</span>
+      <button v-bind:disabled="isButtonDisabled">Button</button>
+      <a :href="url">...</a>
+    </div>
+
+
+
+    <script src="hello.js"></script>
+  </body>
+</html>
+
+
