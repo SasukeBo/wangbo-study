@@ -1,5 +1,6 @@
 defmodule KV.Bucket do
-  use Agent
+  use Agent, restart: :temporary
+  # use Agent
 
   @doc """
   Starts a new bucket.

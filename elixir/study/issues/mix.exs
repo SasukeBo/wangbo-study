@@ -19,7 +19,8 @@ defmodule Issues.MixProject do
   def application do
     [
       extra_applications: [:logger, :httpoison, :jsx, :cowboy, :plug],
-      mod: {Issues.Application, []}
+      # list被传递给Application模块的start函数
+      mod: {Issues.Application, [name: :sasuke]}
     ]
   end
 

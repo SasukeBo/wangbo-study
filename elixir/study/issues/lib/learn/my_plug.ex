@@ -14,7 +14,7 @@ defmodule MyPlug do
   def hello_world_plug(conn, opts) do
     conn
     |> put_resp_content_type("text/plain")
-    |> send_resp(200, "Hello world plug #{opts.value}")
+    |> send_resp(200, "Hello world plug #{opts[:value]}")
   end
 
 end

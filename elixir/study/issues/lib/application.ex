@@ -5,7 +5,9 @@ defmodule Issues.Application do
 
   use Application
 
-  def start(_type, _args) do
+  def start(type, args) do
+    # args 来自mix.exs的application函数中的配置
+    IO.inspect [type, args]
     import Supervisor.Spec, warn: false
 
     IO.puts("application start!")
@@ -13,6 +15,7 @@ defmodule Issues.Application do
     children = [
       Plug.Adapters.Cowboy.child_spec(scheme: :http, plug: MyRouter, options: [port: Application.get_env(:issues, :port)]),
       Issue.Supervisor,
+      KV.Supervisor
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
