@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <title>学习Vue.js</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="demo1">
+      <template v-if="condition === 'show'">
+        <h1>Title</h1>
+        <p>Paragraph 1</p>
+        <p>Paragraph 2</p>
+      </template>
+    </div>
+
+    <div id="demo2">
+      <div v-if="math > 0.5">
+        Now you see me
+      </div>
+      <div v-else>
+        Now you don't
+      </div>
+    </div>
+
+    <div id="demo3">
+      <template v-if="loginType === 'username'">
+        <label>Username</label>
+        <input placeholder="Enter your username">
+      </template>
+      <template v-else>
+        <label>Email</label>
+        <input placeholder="Enter your email address">
+      </template>
+      <button v-on:click="changeLoginType">更换登录方式</button>
+    </div>
+
+    <script src="./conditional.js"></script>
+    <a href="./computed.html">返回上一页</a>
+  </body>
+</html>

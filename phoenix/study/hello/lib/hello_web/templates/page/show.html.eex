@@ -1,1 +1,0 @@
-<h5>You have send in an ID: <%= @id %></h5>
